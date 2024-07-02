@@ -28,3 +28,6 @@ steps:
 images:
   - 'gcr.io/dbms-lab-414417/container1'
   - 'gcr.io/dbms-lab-414417/container2'
+
+options: 
+  logging: CLOUD_LOGGING_ONLY
