@@ -1,0 +1,26 @@
+services:
+  container1:
+    build: ./k8-container1
+    image: us-central1-docker.pkg.dev/dbms-lab-414417/k8-container1/store
+    container_name: container1
+    volumes:
+    - .:/data
+    ports:
+      - "6000:6000"
+    networks:
+      - compose-networks
+
+  container2:
+    build: ./container2
+    image: us-central1-docker.pkg.dev/dbms-lab-414417/k8-container2/calculate
+    container_name: container2
+    volumes:
+      - .:/data
+    ports:
+      - "7000:7000"
+    networks:
+      - compose-networks
+
+networks:
+  compose-networks:
+    driver: bridge
