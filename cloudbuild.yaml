@@ -1,30 +1,30 @@
 steps:
   # Step 1: Build Container 1
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/container1', './container1']
+    args: ['build', '-t', 'gcr.io/dbms-lab-414417/container1', './container1']
 
   # Step 2: Build Container 2
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/container2', './container2']
+    args: ['build', '-t', 'gcr.io/dbms-lab-414417/container2', './container2']
 
   # Step 3: Push Container 1 to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/container1']
+    args: ['push', 'gcr.io/dbms-lab-414417/container1']
 
   # Step 4: Push Container 2 to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/container2']
+    args: ['push', 'gcr.io/dbms-lab-414417/container2']
 
   # Step 5: Deploy to Google Kubernetes Engine (GKE)
   - name: 'gcr.io/cloud-builders/kubectl'
     args:
       - 'apply'
       - '-f'
-      - 'k8s-deployment.yaml'
+      - 'deployment-pvc.yaml'
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=your-cluster-name'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=k8-assignment'
 
 images:
-  - 'gcr.io/$PROJECT_ID/container1'
-  - 'gcr.io/$PROJECT_ID/container2'
+  - 'gcr.io/dbms-lab-414417/container1'
+  - 'gcr.io/dbms-lab-414417/container2'
