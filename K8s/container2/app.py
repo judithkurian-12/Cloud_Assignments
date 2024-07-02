@@ -26,7 +26,6 @@ def sum_product():
             try:
                 header = next(reader)
             except Exception:
-                print("Reached")
                 return jsonify(OrderedDict([("error", "Input file not in CSV format."), ("file", file_name)]))
             
             # Check if the header contains 'product' and 'amount'
